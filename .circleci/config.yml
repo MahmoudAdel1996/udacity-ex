@@ -44,7 +44,7 @@ jobs:
       - run:
           name: smoke-test
           command: |
-            if curl -s --head "https://google.com" 
+            if curl -s --head "http://localhost:3000/" 
             then
               exit 0
             else
@@ -55,9 +55,7 @@ workflows:
   my_workflow:
       jobs:
         # - create_infrastructure
-        - configure_infrastructure
-        - smke-test:
-            requires:
-              - configure_infrastructure
+        # - configure_infrastructure
+        - smoke-test
         
 
