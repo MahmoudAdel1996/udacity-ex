@@ -30,9 +30,6 @@ jobs:
       - run:
           name: Run Playbook and Configure server
           command: |
-            echo "[defaults]" > ansible.cfg
-            echo "host_key_checking = false" >> ansible.cfg
-            cat ansible.cfg
             ansible-playbook -i inventory.txt main.yml
 
 workflows:
