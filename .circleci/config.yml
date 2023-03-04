@@ -38,9 +38,7 @@ jobs:
     docker:
       - image: alpine:latest
     steps:
-      - add_ssh_keys:
-              # You can get this ID in the section where you registered the SSH Key
-              fingerprints: ["40:eb:38:65:77:5e:8a:83:30:2e:58:34:2b:7f:8c:be"] 
+      - run: apk add --update curl
       - run:
           name: smoke-test
           command: |
