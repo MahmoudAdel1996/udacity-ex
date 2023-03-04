@@ -32,11 +32,32 @@ jobs:
           command: |
             ansible-playbook -i inventory.txt main.yml
 
+  
+  # Exercise: Config and Deployment
+  smoke-test: 
+    docker:
+      - image: alpine:latest
+    steps:
+      - add_ssh_keys:
+              # You can get this ID in the section where you registered the SSH Key
+              fingerprints: ["40:eb:38:65:77:5e:8a:83:30:2e:58:34:2b:7f:8c:be"] 
+      - run:
+          name: smoke-test
+          command: |
+            if curl -s --head "https://google.com" 
+            then
+              exit 0
+            else
+              exit 1
+            fi
+
 workflows:
   my_workflow:
       jobs:
         # - create_infrastructure
         - configure_infrastructure
-            # requires:
-              # - create_infrastructure
+        - smke-test:
+            requires:
+              - configure_infrastructure
+        
 
